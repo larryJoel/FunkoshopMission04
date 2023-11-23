@@ -1,11 +1,16 @@
 const express =  require('express');
+const mainRoutes = require('./src/routes/main.routes.js');
+const shopRoutes = require('./src/routes/shop.routes.js');
+const admRoutes = require('./src/routes/admin.routes.js');
+const authRoutes = require('./src/routes/auth.routes.js');
 const app = express();
 
 //middleware
 app.use(express.static('public'));
+app.use('/', mainRoutes);
+app.use('/shop',shopRoutes);
+app.use('/auth/admin', authRoutes);
+app.use('/adm', admRoutes);
 
-
-app.get('/home',(req, res)=> res.sendFile(__dirname + '/public/index.html'));//ruta dinámica
-app.get('/ping', (req, res)=> res.send('pong'));
 
 app.listen(4000, ()=> console.log('servidor corriendo en Http://localhost:4000'));
